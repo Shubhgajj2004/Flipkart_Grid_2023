@@ -121,42 +121,4 @@ class FashionIQDataset(Dataset):
         return len(self.image_names)
 
 
-class CIRRDataset(Dataset):
-    """
-    CIRR dataset class which manage CIRR data
-    The dataset can be used in 'relative' or 'classic' mode:
-    This dataset yield tuples made of (image_name, image)
-    """
-
-    def __init__(self, split: str, preprocess: callable):
-        """
-        :param split: dataset split, should be in ['test', 'val']
-        :param preprocess: function which preprocess the image
-        """
-        self.preprocess = preprocess
-        self.split = split
-
-        if split not in ['test1', 'val']:
-            raise ValueError("split should be in ['test1', 'val']")
-
-        # get a mapping from image name to relative path
-        with open(server_base_path / 'cirr_dataset' / 'cirr' / 'image_splits' / f'split.rc2.{split}.json') as f:
-            self.name_to_relpath = json.load(f)
-
-        print(f"CIRR {split} dataset initialized")
-
-    def __getitem__(self, index):
-        try:
-            image_name = list(self.name_to_relpath.keys())[index]
-            image_path = server_base_path / 'cirr_dataset' / self.name_to_relpath[image_name]
-            im = PIL.Image.open(image_path)
-            image = self.preprocess(im)
-            return image_name, image
-
-        except Exception as e:
-            print(f"Exception: {e}")
-
-    def __len__(self):
-        return len(self.name_to_relpath)
-
 # ---------------------------------------------------------
