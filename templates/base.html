@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} Gen Fashion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mdb.dark.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mdb.min.css') }}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-md navbar-light py-0" style="background-color: #fffdfc">
+    <a class="navbar-brand mx-3" href="{{ url_for('choice') }}"><b>Gen Fashion</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-2">
+                <a class="nav-link {% if 'fashionIQ' in request.path %}active{% endif %}"
+                   href="{{ url_for('reference', dataset='fashionIQ') }}">FashionFlow</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer class="mt-auto">
+    <hr>
+    <div class="text-center py-4">
+        <p>Flipkart Team - Thrice as Nice Coders</p>
+        <p>Sardar Vallabhbhai National Institute of Technology, Surat</p>
+    </div>
+</footer>
+</body>
+</html>
