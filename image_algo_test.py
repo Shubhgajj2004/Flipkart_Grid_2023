@@ -19,7 +19,7 @@ model = tensorflow.keras.Sequential([
     GlobalMaxPooling2D()
 ])
 
-img = image.load_img('dwImg/23.jpg',target_size=(224,224))
+img = image.load_img('images/image2.jpg',target_size=(224,224))
 img_array = image.img_to_array(img)
 expanded_img_array = np.expand_dims(img_array, axis=0)
 preprocessed_img = preprocess_input(expanded_img_array)
